@@ -45,4 +45,23 @@ bot.on("text", async (ctx) => {
     await ctx.reply(`Error: ${error.message}`);
   }
 });
-bot.launch();
+
+if (process.env.NODE_ENV === "production") {
+  bot.telegram.setWebhook(`${process.env.VERCEL_URL}/api`);
+} else {
+  bot.launch();
+}
+
+module.exports = async (req, res) => {
+  try {
+    if (req.method === "POST") {
+      await bot.handleUpdate(req.body, res);
+    } else {
+      // check are all good
+      res.status(200).json("Listening to bot events...");
+    }
+  } catch (error) {
+    console.error("Error handling update:", error);
+    res.status(500).json("Error");
+  }
+};
