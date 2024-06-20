@@ -1,7 +1,6 @@
-const { VercelRequest, VercelResponse } = require("@vercel/node");
 const bot = require("../bot");
 
-module.exports = async (req = VercelRequest, res = VercelResponse) => {
+module.exports = async (req, res) => {
   try {
     if (req.method === "POST") {
       await bot(req, res);
