@@ -48,7 +48,7 @@ bot.on("text", async (ctx) => {
 
 if (process.env.NODE_ENV === "production") {
   (async () => {
-    const webhookUrl = process.env.VERCEL_URL + "/api";
+    const webhookUrl = process.env.hook;
     await bot.telegram.setWebhook(webhookUrl);
     console.log("Bot is running on webhook:", webhookUrl);
   })();
