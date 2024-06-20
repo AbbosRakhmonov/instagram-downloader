@@ -6,5 +6,12 @@
       "source": "/(.*)",
       "destination": "api/index.js"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api",
+      "permanent": false
+    }
   ]
 }
