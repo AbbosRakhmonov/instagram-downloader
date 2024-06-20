@@ -2,7 +2,6 @@ const { Telegraf } = require("telegraf");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
-const { VercelRequest, VercelResponse } = require("@vercel/node");
 const { Telegraf } = require("telegraf");
 const instagramDl = require("@sasmeee/igdl");
 const axios = require("axios");
@@ -51,12 +50,12 @@ bot.on("text", async (ctx) => {
   }
 });
 
-module.exports = async (req = VercelRequest, res = VercelResponse) => {
+module.exports = async (req, res) => {
   try {
     if (req.method === "POST") {
       await bot.handleUpdate(req.body, res);
     } else {
-      res.status(200).send("OK");
+      res.status(200).json("Listening to bot events ....");
     }
   } catch (error) {
     res.statusCode = 500;
