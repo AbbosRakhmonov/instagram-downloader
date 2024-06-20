@@ -47,8 +47,11 @@ bot.on("text", async (ctx) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  bot.telegram.deleteWebhook();
-  bot.telegram.setWebhook(`${process.env.VERCEL_URL}/api`);
+  (async () => {
+    const webhookUrl = process.env.VERCEL_URL + "/api";
+    await bot.telegram.setWebhook(webhookUrl);
+    console.log("Bot is running on webhook:", webhookUrl);
+  })();
 } else {
   bot.launch();
 }
